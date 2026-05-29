@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#090b11" />
+  <title>UML Forge • JSON vers UML</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Oxanium:wght@500;700&family=Sora:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="app-shell">
+    <div class="scene-layer" aria-hidden="true">
+      <span class="shape shape--halo"></span>
+      <span class="shape shape--ring"></span>
+      <span class="shape shape--arc"></span>
+      <span class="shape shape--stripe"></span>
+    </div>
+
+    <section class="screen login-screen" id="loginScreen">
+      <div class="card login-card">
+        <div class="brand-badge">UML Forge</div>
+        <h1>Accès sécurisé</h1>
+        <p>Entrez votre mot de passe pour ouvrir l’atelier de conversion JSON → UML.</p>
+
+        <form id="loginForm">
+          <label for="passwordInput">Mot de passe</label>
+          <input type="password" id="passwordInput" placeholder="••••••••" autocomplete="current-password" required />
+          <button type="submit" id="loginButton">Ouvrir l’atelier</button>
+          <p class="error-message" id="loginError" aria-live="polite"></p>
+        </form>
+      </div>
+    </section>
+
+    <section class="screen main-screen hidden" id="mainScreen">
+      <div class="workspace">
+        <header class="workspace-header">
+          <div>
+            <span class="eyebrow">UML Forge</span>
+            <h1>Convertisseur JSON en UML</h1>
+            <p>Transforme les structures JSON en diagrammes UML propres, prêts à être exportés ou partagés.</p>
+          </div>
+          <div class="header-meta">
+            <span class="pill">Front statique GitHub Pages</span>
+            <span class="pill pill--soft">Backend Vercel sécurisé</span>
+          </div>
+        </header>
+
+        <div class="workspace-grid">
+          <aside class="panel card panel--left">
+            <div class="panel-tag">Étape 1</div>
+            <h2>Données JSON</h2>
+            <p>Colle ton objet JSON, vérifie la syntaxe, puis envoie-le au backend pour génération UML.</p>
+
+            <div class="field-group">
+              <label for="jsonInput">JSON à convertir</label>
+              <textarea id="jsonInput" spellcheck="false" placeholder="Collez votre JSON ici..."></textarea>
+            </div>
+
+            <div class="actions">
+              <button id="generateButton">Générer le diagramme UML</button>
+              <button type="button" id="resetButton" class="secondary">Réinitialiser</button>
+            </div>
+
+            <p class="status" id="statusText" aria-live="polite"></p>
+            <div class="feedback" id="feedbackMessage" aria-live="assertive"></div>
+          </aside>
+
+          <section class="panel card panel--right">
+            <div class="panel-header">
+              <div>
+                <span class="panel-tag">Prévisualisation</span>
+                <h2>Diagramme UML</h2>
+              </div>
+              <span class="badge">IA + PlantUML</span>
+            </div>
+
+            <div class="result-shell">
+              <div class="result-panel hidden" id="resultPanel">
+                <div class="image-frame" id="imageFrame">
+                  <img id="umlImage" alt="Diagramme UML généré" />
+                </div>
+
+                <div class="code-toolbar">
+                  <span class="code-caption">PlantUML</span>
+                  <button id="copyButton" class="secondary">Copier le code</button>
+                </div>
+
+                <pre class="plantuml-code" id="plantumlCode"></pre>
+              </div>
+
+              <div class="placeholder-text" id="placeholderText">
+                Glisse un JSON valide ici et active la génération pour afficher le diagramme UML instantanément.
+              </div>
+            </div>
+          </section>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
